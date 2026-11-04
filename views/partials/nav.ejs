@@ -1,0 +1,29 @@
+<nav id="nav">
+    <ul>
+        <li><a class="icon solid fa-home" href="/"><span>Főoldal</span></a></li>
+        <li><a class="icon solid fa-database" href="/db"><span>Adatbázis</span></a></li>
+        <li>
+            <a class="icon solid fa-envelope" ><span>Kapcsolat</span></a>
+            <ul>
+                <li><a href="#">Üzenet küldése</a></li>
+                <li><a href="#">Üzenetek megtekintése</a></li>
+            </ul>
+        </li>
+        <li><a class="icon solid fa-chart-bar" href="/dbdiagram"><span>Diagram</span></a></li>
+        <li><a class="icon solid fa-table" href="#"><span>CRUD</span></a></li>
+        <li>
+            <a class="icon fa-user">
+                <span>Fiók</span>
+            </a>
+            <ul>
+                <li><a href="/login">Bejelentkezés</a></li>
+                <li><a href="/register">Regisztráció</a></li>
+                <li>
+                    <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Kijelentkezés</a>
+                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
