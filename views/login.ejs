@@ -1,8 +1,32 @@
-<%- include("partials/header") %>
-<% if(message){ %><p class="message"><%= message %></p><% } %>
-<form method="POST">
-    <input name="username">
-    <input type="password" name="password">
-    <button>Login</button>
-</form>
+<%- include("partials/header", { title: "Bejelentkezés" }) %>
+<section id="main">
+    <div class="container">
+        <div class="row aln-center">
+            <div class="col-6">
+            <!-- Main -->
+                <% if(message){ %><p class="message"><%= message %></p><% } %>
+                <form method="POST" action="/login">
+                    <div class="row gtr-25">
+                        <div class="col-12">
+                            <input type="email" id="email" name="email" placeholder="E-mail cím"/>
+                        </div>
+                        <div class="col-12">
+                            <input type="password" id="password" name="password" placeholder="Jelszó"/>
+                        </div>
+                        <div class="col-6">
+                            <input type="checkbox" id="remember" name="remember"/>
+                            <label class="small-text" for="remember">Bejelentkezve maradok</label>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" value="Bejelentkezés"/>
+                        </div>
+                        <div class="col-12 center-align">
+                            <span>Nem vagy még felhasználó? <a href="/register"><strong>Regisztrálj!</strong></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 <%- include("partials/footer") %>
