@@ -10,6 +10,8 @@ function dbConfig(req, res, next, model) {
     next()
 }
 
+router.get("/", async (req, res) => { return res.render("dbSelect"); })
+
 router.get("/kategoria", (req,res,next) => dbConfig(req,res,next,Kategoria), controller.pizzaDbView);
 router.get("/pizza", (req,res,next) => dbConfig(req,res,next,Pizza), controller.pizzaDbView);
 router.get("/rendeles", (req,res,next) => dbConfig(req,res,next,Rendeles), controller.pizzaDbView);

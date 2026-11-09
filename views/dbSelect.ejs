@@ -1,0 +1,30 @@
+<%- include('partials/header', { 
+    title: "Adatbázis"
+}) 
+%>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward"/>
+<section id="features">
+    <div class="container">
+        <div class="row aln-center">
+            <div class="col-4 col-6-medium col-12-small">
+                <section>
+                    <a href="/db/kategoria" class="image featured"><img src="/images/select_kategoria.jpg" alt="" /></a>
+                    <header><h3>Kategóriák</h3></header>
+                </section>
+            </div>
+            <div class="col-4 col-6-medium col-12-small">
+                <section>
+                    <a href="/db/pizza" class="image featured"><img src="/images/select_pizza.jpg" alt="" /></a>
+                    <header><h3>Pizzák</h3></header>
+                </section>
+            </div>
+            <div class="col-4 col-6-medium col-12-small">
+                <section>
+                    <a href="/db/rendeles" class="image featured"><img src="/images/select_rendeles.jpg" alt="" /></a>
+                    <header><h3>Rendelések</h3></header>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('partials/footer') %>
