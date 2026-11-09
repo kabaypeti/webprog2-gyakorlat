@@ -8,6 +8,10 @@ exports.adminIndex = (req, res) => { res.render("admin"); };
 exports.registerGet = (req, res) => { res.render("register"); };
 exports.registerPost = async (req, res) => {
     const existingUser = await User.findOne({ username: req.body.username });
+    if (req.body.password !== req.body.password_confirmation) {
+        req.session.message = "The provided passwords do not match!";
+        return res.redirect("/register");
+    }
     if (existingUser) {
         req.session.message = "This user already exists!";
         return res.redirect("/register");
