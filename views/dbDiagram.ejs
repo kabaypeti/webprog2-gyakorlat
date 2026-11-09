@@ -1,0 +1,82 @@
+<%- include('partials/header', { title: "Adatbázis diagram"}) 
+%>
+<section id="main">
+    <div class="container">
+        <!-- Main -->
+        <div class="row aln-center">
+            <!-- Content -->
+            <div id="content" class="col-11 col-12-medium">
+                <canvas id="diagram">
+                </canvas>
+            </div>
+        </div>
+        <form action="#" method="GET" id="sorttype-form">
+            <div class="row aln-center" style="margin-top: 10px">
+                <ul class="inline-list">
+                    <li>
+                        <label class="page-txt" for="sorttype">Rendezés:</label>
+                    </li>
+                    <li>
+                        <% if (locals.sortoptions && locals.sorttype) { %>
+                            <select id="sorttype" name="sorttype" onchange="document.getElementById('sorttype-form').submit();">
+                                <% for (let s in sortoptions) { %>
+                                    <option 
+                                        value=<%=s%> 
+                                        <% if (sorttype===s) { %> selected <% } %>
+                                    >
+                                        <%=sortoptions[s]%>
+                                    </option>
+                                <% } %>
+                            </select>
+                        <% } %>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('diagram');
+    
+    var pizzanev = <%-JSON.stringify(data_pizzanev)%>;
+    var darab = <%-JSON.stringify(data_darab)%>;
+    
+    console.log(pizzanev ?? "undefined!!");
+    console.log(darab ?? "undefined!!");
+    
+    var min = Math.min(...darab) - 20;
+    
+    const data = {
+        labels: pizzanev,
+        datasets: [{
+            label: 'Összesen rendelt darabszám',
+            data: darab,
+            hoverOffset: 0,
+            backgroundColor: 'rgba(235, 70, 38, 0.8)',
+            barThickness: 10,
+            hoverBackgroundColor: 'rgba(255, 165, 82, 1)'
+        }]
+    };
+    new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                x: {
+                    ticks: {
+                        display: true,
+                        autoSkip: false
+                    }
+                },
+                y: {
+                    min: min
+                },
+            }
+        }
+    });
+</script>
+<%- include('partials/footer') %>

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const controller = require("../controllers/mainController");
+const dbController = require("../controllers/dbController");
 
 isLoggedIn=(req,res,next)=>{
     if(req.session.user){return next();}
@@ -18,5 +19,7 @@ router.post("/login", controller.loginPost);
 router.get("/logout", controller.logout);
 router.get("/user", isLoggedIn, controller.userIndex);
 router.get("/admin", isAdmin, controller.adminIndex);
+
+router.get("/dbdiagram", dbController.pizzaDbDiagram);
 
 module.exports = router;
