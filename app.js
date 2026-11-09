@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const { MongoStore } = require("connect-mongo");
 const app = express();
+
 mongoose.connect(process.env.MONGO_URI);
+
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -21,5 +23,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/", require("./routes/mainRouter"));
+app.use("/db/", require("./routes/dbRoutes"));
 const port = 3000;
 app.listen(port, () => {console.log(`Server: http://localhost:${port}`);});
