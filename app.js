@@ -24,5 +24,7 @@ app.use((req, res, next) => {
 });
 app.use("/", require("./routes/mainRouter"));
 app.use("/db/", require("./routes/dbRoutes"));
+app.use("/CRUD/", require("./routes/crudRoutes"));
+
 const port = 3000;
 app.listen(port, () => {console.log(`Server: http://localhost:${port}`);});
