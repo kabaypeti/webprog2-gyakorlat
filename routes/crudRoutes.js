@@ -9,5 +9,7 @@ function dbConfig(req, res, next, model) {
 }
 
 router.get("/", (req,res,next) => dbConfig(req,res,next,Kategoria), controller.CRUDview);
+router.get("/create", (req,res,next) => dbConfig(req,res,next,Kategoria), controller.CRUDcreate);
+router.post("/", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDstore);
 
 module.exports = router;
