@@ -33,11 +33,10 @@
                                     <a href="#" class="button small alert" onclick="
                                             event.preventDefault();
                                             if (confirm('Biztosan törölni szeretnéd ezt a kategóriát?')) {
-                                                document.getElementById('delete-form').submit();
+                                                document.getElementById('delete-<%= d._id %>').submit();
                                             }" style="height: auto; line-height: inherit; padding: 0 15px;">
                                             Törlés</a>
-                                    <form id="delete-form" action="#" method="POST" style="margin: 0;">
-                                    </form>
+                                    <form id="delete-<%= d._id %>" action="/CRUD/<%= d._id %>/delete" method="POST" style="margin: 0;"></form>
                                 </td>
                             </tr>
                         <% } %>

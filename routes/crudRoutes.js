@@ -15,4 +15,6 @@ router.post("/", (req, res, next) => dbConfig(req, res, next, Kategoria), contro
 router.get("/:id/edit", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDedit);
 router.post("/:id/update", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDupdate);
 
+router.post("/:id/delete", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDdestroy);
+
 module.exports = router;

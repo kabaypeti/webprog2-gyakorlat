@@ -120,6 +120,17 @@ exports.CRUDupdate = async (req, res) => {
     }
 };
 
+exports.CRUDdestroy = async (req, res) => {
+    if (req.model) {
+        try {
+            await req.model.findByIdAndDelete(req.params.id);
+            return res.redirect("/CRUD/");
+        } catch (err) {
+            return res.status(400).send("Hiba történt a törlés során.");
+        }
+    }
+};
+
 function paginate(query, currentPage, perPage) {
     return query.skip((currentPage-1) * perPage).limit(perPage)
 }
