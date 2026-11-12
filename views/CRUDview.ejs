@@ -21,11 +21,13 @@
                         </thead>
                         <% for (let d of data) { %>
                             <tr>
-                                <% for (let key in d) { %>
-                                    <td><%=d[key]%></td>
-                                <% } %>
+                                <% Object.entries(d).forEach(function([k, v]) { %>
+                                    <% if (k !== '_id') { %>
+                                        <td><%= v %></td>
+                                    <% } %>
+                                <% }); %>
                                 <td>
-                                    <a href="#" class="button small" style="height: auto; line-height: inherit; padding: 0 15px;">Szerkesztés</a>
+                                    <a href="/CRUD/<%= d._id %>/edit" class="button small" style="height: auto; line-height: inherit; padding: 0 15px;">Szerkesztés</a>
                                 </td>
                                 <td>
                                     <a href="#" class="button small alert" onclick="

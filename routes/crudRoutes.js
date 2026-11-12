@@ -12,4 +12,7 @@ router.get("/", (req,res,next) => dbConfig(req,res,next,Kategoria), controller.C
 router.get("/create", (req,res,next) => dbConfig(req,res,next,Kategoria), controller.CRUDcreate);
 router.post("/", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDstore);
 
+router.get("/:id/edit", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDedit);
+router.post("/:id/update", (req, res, next) => dbConfig(req, res, next, Kategoria), controller.CRUDupdate);
+
 module.exports = router;
