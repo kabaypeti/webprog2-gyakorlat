@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const { MongoStore } = require("connect-mongo");
 const app = express();
+const { isAdmin } = require("./controllers/authMiddleware");
 
 mongoose.connect(process.env.MONGO_URI);
 
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
 });
 app.use("/", require("./routes/mainRouter"));
 app.use("/db/", require("./routes/dbRoutes"));
-app.use("/CRUD/", require("./routes/crudRoutes"));
+app.use("/CRUD/", isAdmin,  require("./routes/crudRoutes"));
 app.use("/uzenet/", require("./routes/uzenetRoutes"));
 
 const port = 3000;
