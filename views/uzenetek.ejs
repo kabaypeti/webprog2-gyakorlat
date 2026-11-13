@@ -1,0 +1,56 @@
+<%- include('partials/header', { title: "Üzenetek" }) 
+%>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward"/>
+<section id="main">
+	<div class="container">
+		<div class="row aln-center">
+			<div id="content" class="col-8 col-12-medium">
+				
+				<h2>Üzenetek</h2>
+				
+				<div style="margin-top: 30px;">
+					<% if (locals.uzenetek && uzenetek.length > 0) { %>
+						<% uzenetek.forEach(function(u) { %>
+							<div style="background: #f8f9fa; border: 1px solid #dbdbdb; border-radius: 6px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+
+								<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e6e6e6; padding-bottom: 8px; margin-bottom: 12px;">
+									<strong style="color: #333; font-size: 1.1em;">
+										<%= u.felhasznalo %>
+									</strong>
+									<span style="color: #888; font-size: 0.9em;">
+										<%= u.datum ? new Date(u.datum).toLocaleString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '' %>
+									</span>
+								</div>
+
+								<div style="color: #555; line-height: 1.6;">
+									<%= u.uzenet %>
+								</div>
+								
+							</div>
+						<% }); %>
+					<% } else { %>
+						<p style="text-align: center; color: #888;">
+							Még nem érkezett üzenet.
+						</p>
+					<% } %>
+				</div>
+
+				<% if (locals.maxpages && maxpages > 1) { %>
+					<div style="margin-top: 20px; text-align: center;">
+						<% if (page > 1) { %>
+							<a href="?page=<%= page - 1 %>&perpage=<%= perpage %>" class="button small">Előző</a>
+						<% } %>
+						
+						<span style="margin: 0 15px;">Oldal: <%= page %> / <%= maxpages %></span>
+						
+						<% if (page < maxpages) { %>
+							<a href="?page=<%= page + 1 %>&perpage=<%= perpage %>" class="button small">Következő</a>
+						<% } %>
+					</div>
+				<% } %>
+
+			</div>
+		</div>
+	</div>
+</section>
+<%- include('partials/footer') %>
