@@ -7,6 +7,7 @@ const app = express();
 const { isAdmin } = require("./controllers/authMiddleware");
 
 mongoose.connect(process.env.MONGO_URI);
+mongoose.connection.on('open', () => {
 require("./seed.js");
 
 app.set("view engine", "ejs");
@@ -31,3 +32,4 @@ app.use("/uzenet/", require("./routes/uzenetRoutes"));
 
 const port = 3000;
 app.listen(port, () => {console.log(`Szerver elindult a ${port} porton`);});
+});

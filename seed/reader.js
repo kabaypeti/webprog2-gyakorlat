@@ -2,13 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 let read = function(name) {
+    console.log(`${name} olvasása`);
     var p = `./txt/${name}.txt`;
     var contents = fs.readFileSync(path.join(__dirname, p)).toString();
     
     const lines = contents.trim().split('\r\n');
     var table = [];
     var columnline = lines[0];
-    console.log(`${name} első sora: ${columnline}`);
     if (columnline) {
         var columns = columnline.trim().split("\t");
         for (var j = 1; j < lines.length; j++) {
