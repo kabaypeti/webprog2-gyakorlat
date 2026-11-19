@@ -5,31 +5,36 @@ const session = require("express-session");
 const { MongoStore } = require("connect-mongo");
 const app = express();
 const { isAdmin } = require("./controllers/authMiddleware");
+const seed = require("./seed");
 
-require("./seed");
-mongoose.connect(process.env.MONGO_URI).then(() => {;
-console.log('Kapcsolódva MongoDB-re');
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({mongoUrl: process.env.SESSION_MONGO_URI, collectionName: "sessions"})
-}));
-app.use((req, res, next) => {
-    res.locals.user = req.session.user;
-    res.locals.message = req.session.message || "";
-    req.session.message = "";
-    next();
-});
-app.use("/", require("./routes/mainRouter"));
-app.use("/db/", require("./routes/dbRoutes"));
-app.use("/CRUD/", isAdmin,  require("./routes/crudRoutes"));
-app.use("/uzenet/", require("./routes/uzenetRoutes"));
+seed().then(() => {
+    
+    mongoose.connect(process.env.MONGO_URI).then(() => {
+        
+        console.log('Kapcsolódva MongoDB-re');
+        app.set("view engine", "ejs");
+        app.use(express.urlencoded({ extended: true }));
+        app.use(express.static("public"));
+        app.use(session({
+            secret: process.env.SESSION_SECRET,
+            resave: false,
+            saveUninitialized: false,
+            store: MongoStore.create({mongoUrl: process.env.SESSION_MONGO_URI, collectionName: "sessions"})
+        }));
+        app.use((req, res, next) => {
+            res.locals.user = req.session.user;
+            res.locals.message = req.session.message || "";
+            req.session.message = "";
+            next();
+        });
+        app.use("/", require("./routes/mainRouter"));
+        app.use("/db/", require("./routes/dbRoutes"));
+        app.use("/CRUD/", isAdmin,  require("./routes/crudRoutes"));
+        app.use("/uzenet/", require("./routes/uzenetRoutes"));
 
-const port = 3000;
-app.listen(port, () => {console.log(`Szerver elindult a ${port} porton`);});
-
+        const port = 3000;
+        app.listen(port, () => {
+            console.log(`Szerver elindult a ${port} porton`);
+        });
+    })
 })

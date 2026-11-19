@@ -20,4 +20,4 @@ async function seed() {
   console.log("Seedelés kész");
   await mongoose.connection.close();
 }
-seed();
+module.exports=seed;
