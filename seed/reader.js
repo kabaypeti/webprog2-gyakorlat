@@ -8,6 +8,7 @@ let read = function(name) {
     const lines = contents.trim().split('\r\n');
     var table = [];
     var columnline = lines[0];
+    console.log(`${name} első sora: ${columnline}`);
     if (columnline) {
         var columns = columnline.trim().split("\t");
         for (var j = 1; j < lines.length; j++) {

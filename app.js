@@ -6,8 +6,8 @@ const { MongoStore } = require("connect-mongo");
 const app = express();
 const { isAdmin } = require("./controllers/authMiddleware");
 
-require("./seed.js");
 mongoose.connect(process.env.MONGO_URI);
+require("./seed.js");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));

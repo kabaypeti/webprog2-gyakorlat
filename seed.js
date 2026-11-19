@@ -6,7 +6,6 @@ const Pizza = require("./models/Pizza")
 const Rendeles = require("./models/Rendeles")
 
 async function seed() {
-  await mongoose.connect(process.env.MONGO_URI);
   console.log("Seedelés kezdődik");
   
   //await Kategoria.deleteMany({});
@@ -19,6 +18,5 @@ async function seed() {
   if (!(await Rendeles.findOne({}).exec())) await Rendeles.insertMany(reader.read("rendeles"));
   
   console.log("Seedelés kész");
-  mongoose.connection.close();
 }
 seed();
