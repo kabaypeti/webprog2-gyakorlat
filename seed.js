@@ -15,7 +15,7 @@ async function seed() {
   
   let doc = mongoose.Document.prototype;
   console.log(doc.$isEmpty('kategoria'));
-  if (doc.$isEmpty('kategoria')) await Kategoria.updateMany( reader.read("kategoria"));
+  if (doc.$isEmpty('kategoria')) await Kategoria.insertMany(reader.read("kategoria"));
   if (doc.$isEmpty('pizza')) await Pizza.insertMany(reader.read("pizza"));
   if (doc.$isEmpty('rendeles')) await Rendeles.insertMany(reader.read("rendeles"));
   
