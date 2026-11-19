@@ -13,11 +13,10 @@ async function seed() {
   //await Pizza.deleteMany({});
   //await Rendeles.deleteMany({});
   
-  let doc = mongoose.Document.prototype;
-  console.log(doc.$isEmpty('kategoria'));
-  if (doc.$isEmpty('kategoria')) await Kategoria.insertMany(reader.read("kategoria"));
-  if (doc.$isEmpty('pizza')) await Pizza.insertMany(reader.read("pizza"));
-  if (doc.$isEmpty('rendeles')) await Rendeles.insertMany(reader.read("rendeles"));
+  console.log(await Kategoria.findOne({}).exec())
+  if (!(await Kategoria.findOne({}).exec())) await Kategoria.insertMany(reader.read("kategoria"));
+  if (!(await Pizza.findOne({}).exec())) await Pizza.insertMany(reader.read("pizza"));
+  if (!(await Rendeles.findOne({}).exec())) await Rendeles.insertMany(reader.read("rendeles"));
   
   console.log("Seedelés kész");
   mongoose.connection.close();
