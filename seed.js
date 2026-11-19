@@ -13,12 +13,11 @@ async function seed() {
   //await Pizza.deleteMany({});
   //await Rendeles.deleteMany({});
   
-  console.log("Kategoria count: " + Kategoria.length);
-  console.log("Pizza count: " + Pizza.length);
-  console.log("Rendeles count: " + Rendeles.length);
-  if (Kategoria.length == 0) await Kategoria.insertMany(reader.read("kategoria"));
-  if (Pizza.length == 0) await Pizza.insertMany(reader.read("pizza"));
-  if (Rendeles.length == 0) await Rendeles.insertMany(reader.read("rendeles"));
+  let doc = mongoose.Document.prototype;
+  console.log(doc.$isEmpty('kategoria'));
+  if (doc.$isEmpty('kategoria')) await Kategoria.updateMany( reader.read("kategoria"));
+  if (doc.$isEmpty('pizza')) await Pizza.insertMany(reader.read("pizza"));
+  if (doc.$isEmpty('rendeles')) await Rendeles.insertMany(reader.read("rendeles"));
   
   console.log("Seedelés kész");
   mongoose.connection.close();
