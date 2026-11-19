@@ -6,10 +6,9 @@ const { MongoStore } = require("connect-mongo");
 const app = express();
 const { isAdmin } = require("./controllers/authMiddleware");
 
-mongoose.connect(process.env.MONGO_URI);
-mongoose.connection.on('open', () => {
-require("./seed.js");
-
+require("./seed");
+mongoose.connect(process.env.MONGO_URI).then(() => {;
+console.log('Kapcsolódva MongoDB-re');
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -32,4 +31,5 @@ app.use("/uzenet/", require("./routes/uzenetRoutes"));
 
 const port = 3000;
 app.listen(port, () => {console.log(`Szerver elindult a ${port} porton`);});
-});
+
+})
