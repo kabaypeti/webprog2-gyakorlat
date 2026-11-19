@@ -13,6 +13,9 @@ async function seed() {
   //await Pizza.deleteMany({});
   //await Rendeles.deleteMany({});
   
+  console.log("Kategoria count: " + Kategoria.length);
+  console.log("Pizza count: " + Pizza.length);
+  console.log("Rendeles count: " + Rendeles.length);
   if (Kategoria.length == 0) await Kategoria.insertMany(reader.read("kategoria"));
   if (Pizza.length == 0) await Pizza.insertMany(reader.read("pizza"));
   if (Rendeles.length == 0) await Rendeles.insertMany(reader.read("rendeles"));
