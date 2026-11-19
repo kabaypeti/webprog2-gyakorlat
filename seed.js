@@ -6,18 +6,16 @@ const Pizza = require("./models/Pizza")
 const Rendeles = require("./models/Rendeles")
 
 async function seed() {
-  await mongoose.connect(process.env.MONGO_URI);
   console.log("Seedelés kezdődik");
   
   //await Kategoria.deleteMany({});
   //await Pizza.deleteMany({});
   //await Rendeles.deleteMany({});
   
-  if (!(await Kategoria.findOne({}).exec())) await Kategoria.insertMany(reader.read("kategoria"));
-  if (!(await Pizza.findOne({}).exec())) await Pizza.insertMany(reader.read("pizza"));
-  if (!(await Rendeles.findOne({}).exec())) await Rendeles.insertMany(reader.read("rendeles"));
+  if (await Kategoria.countDocuments() === 0) await Kategoria.insertMany(await reader.read("kategoria"));
+  if (await Pizza.countDocuments() === 0) await Pizza.insertMany(await reader.read("pizza"));
+  if (await Rendeles.countDocuments() === 0) await Rendeles.insertMany(await reader.read("rendeles"));
   
   console.log("Seedelés kész");
-  await mongoose.connection.close();
 }
-module.exports=seed;
+module.exports = { seed: seed }

@@ -6,7 +6,7 @@ let read = function(name) {
     var p = `./txt/${name}.txt`;
     var contents = fs.readFileSync(path.join(__dirname, p)).toString();
     
-    const lines = contents.trim().split('\r\n');
+    const lines = contents.trim().split('/\r?\n/');
     var table = [];
     var columnline = lines[0];
     if (columnline) {
