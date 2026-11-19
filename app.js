@@ -6,6 +6,7 @@ const { MongoStore } = require("connect-mongo");
 const app = express();
 const { isAdmin } = require("./controllers/authMiddleware");
 
+require("./seed.js");
 mongoose.connect(process.env.MONGO_URI);
 
 app.set("view engine", "ejs");
@@ -29,4 +30,4 @@ app.use("/CRUD/", isAdmin,  require("./routes/crudRoutes"));
 app.use("/uzenet/", require("./routes/uzenetRoutes"));
 
 const port = 3000;
-app.listen(port, () => {console.log(`Server: http://localhost:${port}`);});
+app.listen(port, () => {console.log(`Szerver elindult a ${port} porton`);});

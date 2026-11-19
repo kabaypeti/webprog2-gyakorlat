@@ -7,15 +7,15 @@ const Rendeles = require("./models/Rendeles")
 
 async function seed() {
   await mongoose.connect(process.env.MONGO_URI);
-  console.log("Kapcsolódva");
+  console.log("Seedelés kezdődik");
   
-  await Kategoria.deleteMany({});
-  await Pizza.deleteMany({});
-  await Rendeles.deleteMany({});
+  //await Kategoria.deleteMany({});
+  //await Pizza.deleteMany({});
+  //await Rendeles.deleteMany({});
   
-  await Kategoria.insertMany(reader.read("kategoria"));
-  await Pizza.insertMany(reader.read("pizza"));
-  await Rendeles.insertMany(reader.read("rendeles"));
+  if (Kategoria.length == 0) await Kategoria.insertMany(reader.read("kategoria"));
+  if (Pizza.length == 0) await Pizza.insertMany(reader.read("pizza"));
+  if (Rendeles.length == 0) await Rendeles.insertMany(reader.read("rendeles"));
   
   console.log("Seedelés kész");
   mongoose.connection.close();
